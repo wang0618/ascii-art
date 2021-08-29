@@ -1,0 +1,1 @@
+https://web.archive.org/web/20000307193227/http://geocities.com/SoHo/Gallery/6446/indexjs.htm
