@@ -54,16 +54,15 @@ async def main():
     The content is collected from the Internet.
     """, strip_indent=4)
 
-    with use_scope('title'):
-        put_markdown('### %s' % current_module.name)
-
-    set_scope('code')
-
-
     put_buttons([
         (getattr(m, 'name', name), name)
         for name, m in modules.items()
     ], onclick=change_anim)
+
+    with use_scope('title'):
+        put_markdown('### %s' % current_module.name)
+
+    set_scope('code')
 
     while 1:
         duration = getattr(current_module, 'duration', 100)
