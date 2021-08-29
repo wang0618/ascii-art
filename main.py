@@ -32,9 +32,15 @@ modules = get_animation_modules()
 
 
 async def main():
+    """ASCII Animations
+
+    Animations created entirely out of text.
+    """
     set_env(output_animation=False)
 
-    current_module = misc.plane
+    module_name = (await eval_js("window.location.hash") or '')[1:]
+    print(module_name)
+    current_module = modules.get(module_name) or misc.plane
     changed = False
 
     def change_anim(module_name):
@@ -45,13 +51,14 @@ async def main():
         changed = True
         with use_scope('title', clear=True):
             put_markdown('### %s' % current_module.name)
+        run_js('window.location.hash="#%s"' % module_name)
 
     put_markdown("""## ASCII Animations
-    Animations created entirely out of text. Learn more about [ASCII Animations](https://www.incredibleart.org/links/ascii.html).
+    Animations created entirely out of text. [Learn more about ASCII Animations](https://www.incredibleart.org/links/ascii.html).
     
     When viewing on cell phones, it is recommended to turn to landscape mode.
     
-    The content is collected from the Internet.
+    The content is collected from the Internet. [Source code on Github](https://github.com/wang0618/ascii-art).
     """, strip_indent=4)
 
     put_buttons([
@@ -76,4 +83,4 @@ async def main():
 
 
 if __name__ == '__main__':
-    start_server(main, port=8080, debug=True)
+    start_server(main, port=8080)
